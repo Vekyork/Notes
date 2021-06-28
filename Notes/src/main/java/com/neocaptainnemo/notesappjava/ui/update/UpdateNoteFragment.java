@@ -22,6 +22,7 @@ import com.neocaptainnemo.notesappjava.ui.MainRouter;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class UpdateNoteFragment extends Fragment {
 
@@ -52,49 +53,47 @@ public class UpdateNoteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        assert getArguments() != null;
         Note note = getArguments().getParcelable(ARG_NOTE);
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
 
         EditText title = view.findViewById(R.id.title);
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.action_done) {
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.action_done) {
 
-                    Date selectedDate = null;
+                Date selectedDate = null;
 
-                    if (selectedYear != -1 && selectedDayOfMonth != -1 && selectedMonthOfYear != -1) {
-                        Calendar calendar = Calendar.getInstance();
+                if (selectedYear != -1 && selectedDayOfMonth != -1 && selectedMonthOfYear != -1) {
+                    Calendar calendar = Calendar.getInstance();
 
-                        calendar.setTime(note.getDate());
+                    calendar.setTime(note.getDate());
 
-                        calendar.set(Calendar.YEAR, selectedYear);
-                        calendar.set(Calendar.MONTH, selectedMonthOfYear);
-                        calendar.set(Calendar.DAY_OF_MONTH, selectedDayOfMonth);
+                    calendar.set(Calendar.YEAR, selectedYear);
+                    calendar.set(Calendar.MONTH, selectedMonthOfYear);
+                    calendar.set(Calendar.DAY_OF_MONTH, selectedDayOfMonth);
 
-                        selectedDate = calendar.getTime();
-                    }
-
-                    Note result = repository.update(note, title.getText().toString(), selectedDate);
-
-                    if (requireActivity() instanceof RouterHolder) {
-                        MainRouter router = ((RouterHolder) getActivity()).getMainRouter();
-
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable(ARG_NOTE, result);
-
-                        getParentFragmentManager().setFragmentResult(UPDATE_RESULT, bundle);
-
-                        router.back();
-                    }
-
-                    return true;
+                    selectedDate = calendar.getTime();
                 }
 
-                return false;
+                Note result = repository.update(note, title.getText().toString(), selectedDate);
+
+                if (requireActivity() instanceof RouterHolder) {
+                    MainRouter router = ((RouterHolder) requireActivity()).getMainRouter();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(ARG_NOTE, result);
+
+                    getParentFragmentManager().setFragmentResult(UPDATE_RESULT, bundle);
+
+                    router.back();
+                }
+
+                return true;
             }
+
+            return false;
         });
 
 
@@ -106,13 +105,10 @@ public class UpdateNoteFragment extends Fragment {
 
         calendar.setTime(note.getDate());
 
-        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
-            @Override
-            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                selectedYear = year;
-                selectedMonthOfYear = monthOfYear;
-                selectedDayOfMonth = dayOfMonth;
-            }
+        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), (view1, year, monthOfYear, dayOfMonth) -> {
+            selectedYear = year;
+            selectedMonthOfYear = monthOfYear;
+            selectedDayOfMonth = dayOfMonth;
         });
     }
 }

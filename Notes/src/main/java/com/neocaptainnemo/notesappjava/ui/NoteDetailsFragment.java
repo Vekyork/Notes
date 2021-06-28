@@ -39,6 +39,7 @@ public class NoteDetailsFragment extends Fragment {
 
         TextView title = view.findViewById(R.id.title);
 
+        assert getArguments() != null;
         Note note = getArguments().getParcelable(ARG_NOTE);
 
         title.setText(note.getTitle());

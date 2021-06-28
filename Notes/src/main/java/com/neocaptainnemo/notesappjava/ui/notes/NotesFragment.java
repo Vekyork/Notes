@@ -32,6 +32,7 @@ import com.neocaptainnemo.notesappjava.ui.update.UpdateNoteFragment;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class NotesFragment extends Fragment {
 
@@ -58,51 +59,39 @@ public class NotesFragment extends Fragment {
 
         isLoading = true;
 
-        repository.getNotes(new Callback<List<Note>>() {
-            @Override
-            public void onSuccess(List<Note> result) {
-                notesAdapter.setData(result);
-                notesAdapter.notifyDataSetChanged();
+        repository.getNotes(result -> {
+            notesAdapter.setData(result);
+            notesAdapter.notifyDataSetChanged();
 
-                isLoading = false;
+            isLoading = false;
 
-                if (progressBar != null) {
-                    progressBar.setVisibility(View.GONE);
-                }
+            if (progressBar != null) {
+                progressBar.setVisibility(View.GONE);
             }
         });
 
-        notesAdapter.setListener(new NotesAdapter.OnNoteClickedListener() {
-            @Override
-            public void onNoteClickedListener(@NonNull Note note) {
+        notesAdapter.setListener(note -> {
 
-                if (requireActivity() instanceof RouterHolder) {
-                    MainRouter router = ((RouterHolder) requireActivity()).getMainRouter();
+            if (requireActivity() instanceof RouterHolder) {
+                MainRouter router = ((RouterHolder) requireActivity()).getMainRouter();
 
-                    router.showNoteDetail(note);
-                }
+                router.showNoteDetail(note);
+            }
 //                Snackbar.make(view, note.getTitle(), Snackbar.LENGTH_SHORT).show();
-            }
         });
 
-        notesAdapter.setLongClickedListener(new NotesAdapter.OnNoteLongClickedListener() {
-            @Override
-            public void onNoteLongClickedListener(@NonNull Note note, int index) {
-                longClickedIndex = index;
-                longClickedNote = note;
-            }
+        notesAdapter.setLongClickedListener((note, index) -> {
+            longClickedIndex = index;
+            longClickedNote = note;
         });
 
-        getParentFragmentManager().setFragmentResultListener(UpdateNoteFragment.UPDATE_RESULT, this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull  String requestKey, @NonNull Bundle result) {
-                if (result.containsKey(UpdateNoteFragment.ARG_NOTE)) {
-                    Note note = result.getParcelable(UpdateNoteFragment.ARG_NOTE);
+        getParentFragmentManager().setFragmentResultListener(UpdateNoteFragment.UPDATE_RESULT, this, (requestKey, result) -> {
+            if (result.containsKey(UpdateNoteFragment.ARG_NOTE)) {
+                Note note = result.getParcelable(UpdateNoteFragment.ARG_NOTE);
 
-                    notesAdapter.update(note);
+                notesAdapter.update(note);
 
-                    notesAdapter.notifyItemChanged(longClickedIndex);
-                }
+                notesAdapter.notifyItemChanged(longClickedIndex);
             }
         });
 
@@ -134,35 +123,32 @@ public class NotesFragment extends Fragment {
             progressBar.setVisibility(View.VISIBLE);
         }
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.action_add) {
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.action_add) {
 
-                    Note addedNote = repository.add("This is new added title", "https://cdn.pixabay.com/photo/2020/04/17/16/48/marguerite-5056063_1280.jpg");
+                Note addedNote = repository.add("Это новая заметка", "https://cdn.pixabay.com/photo/2020/04/17/16/48/marguerite-5056063_1280.jpg");
 
-                    int index = notesAdapter.add(addedNote);
+                int index = notesAdapter.add(addedNote);
 
-                    notesAdapter.notifyItemInserted(index);
+                notesAdapter.notifyItemInserted(index);
 
-                    notesList.scrollToPosition(index);
+                notesList.scrollToPosition(index);
 
-                    return true;
-                }
-
-                if (item.getItemId() == R.id.action_clear) {
-
-                    repository.clear();
-
-                    notesAdapter.setData(Collections.emptyList());
-
-                    notesAdapter.notifyDataSetChanged();
-
-                    return true;
-                }
-
-                return false;
+                return true;
             }
+
+            if (item.getItemId() == R.id.action_clear) {
+
+                repository.clear();
+
+                notesAdapter.setData(Collections.emptyList());
+
+                notesAdapter.notifyDataSetChanged();
+
+                return true;
+            }
+
+            return false;
         });
 
 
@@ -171,7 +157,7 @@ public class NotesFragment extends Fragment {
         notesList.setLayoutManager(linearLayoutManager);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireContext(), linearLayoutManager.getOrientation());
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_separator));
+        dividerItemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(requireContext(), R.drawable.ic_separator)));
 
         notesList.addItemDecoration(dividerItemDecoration);
 

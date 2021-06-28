@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">NotesAppJava</string>
-    <string name="action_notes">Notes</string>
-    <string name="action_info">Info</string>
-    <string name="notes_title">Notes</string>
-    <string name="action_add">Add</string>
-    <string name="action_clear">Clear</string>
-    <string name="action_update">Update</string>
-    <string name="action_delete">Delete</string>
-    <string name="update_fragment">Fragment Update</string>
-    <string name="title_hint">Title</string>
-    <string name="action_done">Done</string>
+    <string name="app_name">ЗАМЕТКИ</string>
+    <string name="action_notes">Заметки</string>
+    <string name="action_info">Информация</string>
+    <string name="notes_title">Заметки</string>
+    <string name="action_add">Добавить</string>
+    <string name="action_clear">Очистить</string>
+    <string name="action_update">Обновить</string>
+    <string name="action_delete">Удалить</string>
+    <string name="update_fragment">Обновление фрагмента</string>
+    <string name="title_hint">Заголовок</string>
+    <string name="action_done">Готово</string>
 </resources>

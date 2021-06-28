@@ -27,18 +27,15 @@ public class MainActivity extends AppCompatActivity implements RouterHolder {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.action_notes) {
-                    router.showNotes();
-                }
-
-                if (item.getItemId() == R.id.action_info) {
-                    router.showInfo();
-                }
-                return true;
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.action_notes) {
+                router.showNotes();
             }
+
+            if (item.getItemId() == R.id.action_info) {
+                router.showInfo();
+            }
+            return true;
         });
 
 
