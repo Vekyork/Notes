@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.neocaptainnemo.notesappjava.R;
 import com.neocaptainnemo.notesappjava.RouterHolder;
 import com.neocaptainnemo.notesappjava.domain.Note;
+import com.neocaptainnemo.notesappjava.domain.NotesFirestoreRepository;
 import com.neocaptainnemo.notesappjava.domain.NotesRepository;
 import com.neocaptainnemo.notesappjava.domain.NotesRepositoryImpl;
 import com.neocaptainnemo.notesappjava.ui.MainRouter;
@@ -30,7 +31,7 @@ public class UpdateNoteFragment extends Fragment {
     public static final String UPDATE_RESULT = "UPDATE_RESULT";
     public static final String ARG_NOTE = "ARG_NOTE";
 
-    private final NotesRepository repository = NotesRepositoryImpl.INSTANCE;
+    private final NotesRepository repository = NotesFirestoreRepository.INSTANCE;
     private int selectedYear = -1;
     private int selectedMonthOfYear = -1;
     private int selectedDayOfMonth = -1;
@@ -86,7 +87,6 @@ public class UpdateNoteFragment extends Fragment {
                     bundle.putParcelable(ARG_NOTE, result);
 
                     getParentFragmentManager().setFragmentResult(UPDATE_RESULT, bundle);
-
                     router.back();
                 }
 

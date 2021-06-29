@@ -12,9 +12,9 @@ public interface NotesRepository {
 
     void clear();
 
-    Note add(String title, String imageUrl);
+    void add(String title, String imageUrl, Callback<Note> callback);
 
-    void remove(Note note);
+    void remove(Note note, Callback<Object> callback);
 
     Note update(@NonNull Note note, @Nullable String title, @Nullable Date date);
 }

@@ -24,6 +24,7 @@ import com.neocaptainnemo.notesappjava.R;
 import com.neocaptainnemo.notesappjava.RouterHolder;
 import com.neocaptainnemo.notesappjava.domain.Callback;
 import com.neocaptainnemo.notesappjava.domain.Note;
+import com.neocaptainnemo.notesappjava.domain.NotesFirestoreRepository;
 import com.neocaptainnemo.notesappjava.domain.NotesRepository;
 import com.neocaptainnemo.notesappjava.domain.NotesRepositoryImpl;
 import com.neocaptainnemo.notesappjava.ui.MainActivity;
@@ -37,7 +38,7 @@ import java.util.Objects;
 public class NotesFragment extends Fragment {
 
     public static final String TAG = "NotesFragment";
-    private final NotesRepository repository = NotesRepositoryImpl.INSTANCE;
+    private final NotesRepository repository = NotesFirestoreRepository.INSTANCE;
     private NotesAdapter notesAdapter;
 
     private int longClickedIndex;
@@ -126,14 +127,17 @@ public class NotesFragment extends Fragment {
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.action_add) {
 
-                Note addedNote = repository.add("Это новая заметка", "https://cdn.pixabay.com/photo/2020/04/17/16/48/marguerite-5056063_1280.jpg");
+                repository.add("Это новая заметка", "https://cdn.pixabay.com/photo/2020/04/17/16/48/marguerite-5056063_1280.jpg", new Callback<Note>() {
+                    @Override
+                    public void onSuccess(Note result) {
 
-                int index = notesAdapter.add(addedNote);
+                        int index = notesAdapter.add(result);
 
-                notesAdapter.notifyItemInserted(index);
+                        notesAdapter.notifyItemInserted(index);
 
-                notesList.scrollToPosition(index);
-
+                        notesList.scrollToPosition(index);
+                    }
+                });
                 return true;
             }
 
@@ -221,11 +225,14 @@ public class NotesFragment extends Fragment {
 
         if (item.getItemId() == R.id.action_delete) {
 
-            repository.remove(longClickedNote);
+            repository.remove(longClickedNote, new Callback<Object>() {
+                @Override
+                public void onSuccess(Object result) {
+                    notesAdapter.remove(longClickedNote);
 
-            notesAdapter.remove(longClickedNote);
-
-            notesAdapter.notifyItemRemoved(longClickedIndex);
+                    notesAdapter.notifyItemRemoved(longClickedIndex);
+                }
+            });
 
             return true;
         }

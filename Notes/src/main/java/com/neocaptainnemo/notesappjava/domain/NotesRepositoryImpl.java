@@ -52,15 +52,16 @@ public class NotesRepositoryImpl implements NotesRepository {
     }
 
     @Override
-    public Note add(String title, String imageUrl) {
+    public void add(String title, String imageUrl, Callback<Note> callback) {
         Note note = new Note(UUID.randomUUID().toString(), title, imageUrl, new Date());
         notes.add(note);
-        return note;
+        callback.onSuccess(note);
     }
 
     @Override
-    public void remove(Note note) {
+    public void remove(Note note, Callback<Object> callback) {
         notes.remove(note);
+        callback.onSuccess(note);
     }
 
     @Override

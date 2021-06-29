@@ -5,10 +5,13 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentResultListener;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.neocaptainnemo.notesappjava.R;
 import com.neocaptainnemo.notesappjava.RouterHolder;
+import com.neocaptainnemo.notesappjava.ui.auth.AuthFragment;
 
 public class MainActivity extends AppCompatActivity implements RouterHolder {
 
@@ -22,14 +25,14 @@ public class MainActivity extends AppCompatActivity implements RouterHolder {
         router = new MainRouter(getSupportFragmentManager());
 
         if (savedInstanceState == null) {
-            router.showNotes();
+            router.showAuth();
         }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.action_notes) {
-                router.showNotes();
+                router.showAuth();
             }
 
             if (item.getItemId() == R.id.action_info) {
@@ -37,9 +40,13 @@ public class MainActivity extends AppCompatActivity implements RouterHolder {
             }
             return true;
         });
+        getSupportFragmentManager().setFragmentResultListener(AuthFragment.AUTH_RESULT, this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                router.showNotes();
+            }
+        });
 
-
-//
 //        Context applicationContext = getApplicationContext();
 //
 //        Context application = getApplication();

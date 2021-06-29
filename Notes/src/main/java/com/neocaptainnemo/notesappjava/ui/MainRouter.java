@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.neocaptainnemo.notesappjava.R;
 import com.neocaptainnemo.notesappjava.domain.Note;
+import com.neocaptainnemo.notesappjava.ui.auth.AuthFragment;
 import com.neocaptainnemo.notesappjava.ui.info.InfoFragment;
 import com.neocaptainnemo.notesappjava.ui.notes.NotesFragment;
 import com.neocaptainnemo.notesappjava.ui.update.UpdateNoteFragment;
@@ -20,6 +21,12 @@ public class MainRouter {
         fragmentManager
                 .beginTransaction()
                 .replace(R.id.container, NotesFragment.newInstance(), NotesFragment.TAG)
+                .commit();
+    }
+    public void showAuth() {
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.container, AuthFragment.newInstance(), AuthFragment.TAG)
                 .commit();
     }
 
