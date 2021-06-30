@@ -41,6 +41,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673609911098:android:446c0b62d486cd82d9de03",
+        "android_client_info": {
+          "package_name": "com.neocaptainnemo.notesappjava"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673609911098-k1p17559a39kqn44ipu5s2ufmai0m0mg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neocaptainnemo.notesappjava",
+            "certificate_hash": "340d9a40f6d4ff5d10360489c5c3aa68541a70ea"
+          }
+        },
+        {
+          "client_id": "673609911098-fcne0l7smv7qmbdoo53qonsh3bacm52r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATIVfL41HUc2k7xPKVALcHGdIY57gkdNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673609911098-fcne0l7smv7qmbdoo53qonsh3bacm52r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
