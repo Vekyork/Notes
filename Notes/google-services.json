@@ -51,11 +51,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "673609911098-k1p17559a39kqn44ipu5s2ufmai0m0mg.apps.googleusercontent.com",
+          "client_id": "673609911098-4io1034cv5osu5krtl8qe914umo7gfor.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.neocaptainnemo.notesappjava",
-            "certificate_hash": "340d9a40f6d4ff5d10360489c5c3aa68541a70ea"
+            "certificate_hash": "959484f83b1a91f427a81603da93b286682a1d64"
           }
         },
         {

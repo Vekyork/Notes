@@ -7,14 +7,14 @@ android {
     signingConfigs {
         debug {
             storeFile file('C:\\Users\\777\\.android\\Key.jks')
-            storePassword 'Password'
+            storePassword 'Qwerty135791+'
             keyAlias 'notes'
-            keyPassword 'Password'
+            keyPassword 'Qwerty135791+'
         }
         notes {
             keyAlias 'notes'
-            keyPassword 'Password'
-            storePassword 'Password'
+            keyPassword 'Qwerty135791+'
+            storePassword 'Qwerty135791+'
             storeFile file('C:\\Users\\777\\.android\\Key.jks')
         }
     }
