@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Article">Подпись</string>
+    <string name="dialog_alert">Диалог предупреждения</string>
+    <string name="multi_choice_dialog">Выбор нескольких вариантов</string>
+</resources>
