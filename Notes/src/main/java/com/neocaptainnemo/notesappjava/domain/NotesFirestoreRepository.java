@@ -64,13 +64,10 @@ public class NotesFirestoreRepository implements NotesRepository{
         data.put(DATE, date);
         firebaseFirestore.collection(NOTES)
                 .add(data)
-                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        if (task.isSuccessful()){
-                            Note note = new Note(Objects.requireNonNull(task.getResult()).getId(), title, imageUrl, date);
-                            callback.onSuccess(note);
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        Note note = new Note(Objects.requireNonNull(task.getResult()).getId(), title, imageUrl, date);
+                        callback.onSuccess(note);
                     }
                 });
     }
@@ -80,12 +77,9 @@ public class NotesFirestoreRepository implements NotesRepository{
         firebaseFirestore.collection(NOTES)
                 .document(note.getId())
                 .delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            callback.onSuccess(note);
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        callback.onSuccess(note);
                     }
                 });
     }

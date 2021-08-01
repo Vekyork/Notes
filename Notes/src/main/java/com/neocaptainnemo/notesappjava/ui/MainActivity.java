@@ -40,12 +40,7 @@ public class MainActivity extends AppCompatActivity implements RouterHolder {
             }
             return true;
         });
-        getSupportFragmentManager().setFragmentResultListener(AuthFragment.AUTH_RESULT, this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                router.showNotes();
-            }
-        });
+        getSupportFragmentManager().setFragmentResultListener(AuthFragment.AUTH_RESULT, this, (requestKey, result) -> router.showNotes());
 
 //        Context applicationContext = getApplicationContext();
 //
