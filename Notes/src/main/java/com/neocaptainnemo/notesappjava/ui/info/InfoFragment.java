@@ -1,6 +1,5 @@
 package com.neocaptainnemo.notesappjava.ui.info;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
-
 import com.google.android.material.snackbar.Snackbar;
 import com.neocaptainnemo.notesappjava.R;
-
-import java.util.Objects;
 
 public class InfoFragment extends Fragment {
 

@@ -1,7 +1,6 @@
 package com.neocaptainnemo.notesappjava.ui.info;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,8 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
-
-import com.google.android.material.snackbar.Snackbar;
 import com.neocaptainnemo.notesappjava.R;
 
 public class AlertDialogFragment extends DialogFragment {
@@ -41,14 +38,14 @@ public class AlertDialogFragment extends DialogFragment {
 //                .setNegativeButton(R.string.btn_negative, new DialogInterface.OnClickListener() {
 //                    @Override
 //                    public void onClick(DialogInterface dialog, int which) {
-//                        Snackbar.make(getView(), "Negative", Snackbar.LENGTH_SHORT).show();
+//                        SnackBar.make(getView(), "Negative", SnackBar.LENGTH_SHORT).show();
 //
 //                    }
 //                })
 //                .setNeutralButton(R.string.btn_neutral, new DialogInterface.OnClickListener() {
 //                    @Override
 //                    public void onClick(DialogInterface dialog, int which) {
-//                        Snackbar.make(getView(), "Neutral", Snackbar.LENGTH_SHORT).show();
+//                        SnackBar.make(getView(), "Neutral", SnackBar.LENGTH_SHORT).show();
 //                    }
 //                });
 

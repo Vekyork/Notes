@@ -2,28 +2,22 @@ package com.neocaptainnemo.notesappjava.ui.update;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-
 import com.neocaptainnemo.notesappjava.R;
 import com.neocaptainnemo.notesappjava.RouterHolder;
 import com.neocaptainnemo.notesappjava.domain.Note;
 import com.neocaptainnemo.notesappjava.domain.NotesFirestoreRepository;
 import com.neocaptainnemo.notesappjava.domain.NotesRepository;
-import com.neocaptainnemo.notesappjava.domain.NotesRepositoryImpl;
 import com.neocaptainnemo.notesappjava.ui.MainRouter;
-
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
 
 public class UpdateNoteFragment extends Fragment {
 

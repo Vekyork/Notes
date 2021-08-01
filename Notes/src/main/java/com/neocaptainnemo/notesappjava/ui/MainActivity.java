@@ -1,13 +1,7 @@
 package com.neocaptainnemo.notesappjava.ui;
 
 import android.os.Bundle;
-import android.view.MenuItem;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentResultListener;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.neocaptainnemo.notesappjava.R;
 import com.neocaptainnemo.notesappjava.RouterHolder;

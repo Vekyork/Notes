@@ -1,7 +1,6 @@
 package com.neocaptainnemo.notesappjava.ui.notes;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -14,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,17 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.neocaptainnemo.notesappjava.R;
 import com.neocaptainnemo.notesappjava.RouterHolder;
-import com.neocaptainnemo.notesappjava.domain.Callback;
 import com.neocaptainnemo.notesappjava.domain.Note;
 import com.neocaptainnemo.notesappjava.domain.NotesFirestoreRepository;
 import com.neocaptainnemo.notesappjava.domain.NotesRepository;
-import com.neocaptainnemo.notesappjava.domain.NotesRepositoryImpl;
-import com.neocaptainnemo.notesappjava.ui.MainActivity;
 import com.neocaptainnemo.notesappjava.ui.MainRouter;
 import com.neocaptainnemo.notesappjava.ui.update.UpdateNoteFragment;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 public class NotesFragment extends Fragment {
@@ -78,7 +72,7 @@ public class NotesFragment extends Fragment {
 
                 router.showNoteDetail(note);
             }
-//                Snackbar.make(view, note.getTitle(), Snackbar.LENGTH_SHORT).show();
+//                SnackBar.make(view, note.getTitle(), SnackBar.LENGTH_SHORT).show();
         });
 
         notesAdapter.setLongClickedListener((note, index) -> {
@@ -127,16 +121,13 @@ public class NotesFragment extends Fragment {
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.action_add) {
 
-                repository.add("Это новая заметка", "https://cdn.pixabay.com/photo/2020/04/17/16/48/marguerite-5056063_1280.jpg", new Callback<Note>() {
-                    @Override
-                    public void onSuccess(Note result) {
+                repository.add("Это новая заметка", "https://cdn.pixabay.com/photo/2020/04/17/16/48/marguerite-5056063_1280.jpg", result -> {
 
-                        int index = notesAdapter.add(result);
+                    int index = notesAdapter.add(result);
 
-                        notesAdapter.notifyItemInserted(index);
+                    notesAdapter.notifyItemInserted(index);
 
-                        notesList.scrollToPosition(index);
-                    }
+                    notesList.scrollToPosition(index);
                 });
                 return true;
             }
@@ -225,13 +216,10 @@ public class NotesFragment extends Fragment {
 
         if (item.getItemId() == R.id.action_delete) {
 
-            repository.remove(longClickedNote, new Callback<Object>() {
-                @Override
-                public void onSuccess(Object result) {
-                    notesAdapter.remove(longClickedNote);
+            repository.remove(longClickedNote, result -> {
+                notesAdapter.remove(longClickedNote);
 
-                    notesAdapter.notifyItemRemoved(longClickedIndex);
-                }
+                notesAdapter.notifyItemRemoved(longClickedIndex);
             });
 
             return true;
